@@ -1,5 +1,6 @@
 from collections import defaultdict
 from itertools import combinations
+from bisect import bisect_left
 from pprint import pprint
 
 def solution(info, query):
@@ -20,7 +21,10 @@ def solution(info, query):
                 key = ''.join(tmp)
                 info_dict[key].append(score)
         # pprint(info_dict)
-
+        
+    for value in info_dict.values():
+        value.sort()
+    
     for q in query:
         q = q.replace(" and "," ").split()
         key = ''.join(q[j] for j in range(4))
@@ -28,9 +32,9 @@ def solution(info, query):
         count = 0
         
         if key in info_dict:
-            for score in info_dict[key]:
-                if score >= tscore:
-                    count+=1
-            answer.append(count)
+            target_list = info_dict[key]
+            idx = bisect_left(target_list,tscore)
+            count = len(target_list)-idx
+        answer.append(count)
             
     return answer

@@ -16,7 +16,7 @@ visited = [0]*(n+1)
 
 def dfs(n):
     visited[n] = 1
-    print(n,end='')
+    print(n,end=' ')
     for i in graph[n]:
         if visited[i] == 0:
             dfs(i)
@@ -30,7 +30,7 @@ def bfs(n):
     queue = deque([n])
     while queue:
         v = queue.popleft()
-        print(v,end='')
+        print(v,end=' ')
         for i in graph[v]:
             if visited[i] == 0:
                 queue.append(i)
